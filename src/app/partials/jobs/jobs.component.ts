@@ -10,6 +10,7 @@ import { APIService } from '../../services/api.service';
 export class JobsComponent implements OnInit, OnChanges {
   initialized = false;
   @Input() public filter;
+  filterValue: any;
   jobs:  Object[];
 
   constructor(private apiService: APIService) {
@@ -17,6 +18,7 @@ export class JobsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log("init", this.filter);
+    this.filterValue = this.filter;
     this.initialized = true;
     this.getJobs();
   }
@@ -24,7 +26,7 @@ export class JobsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.initialized) {
       console.log("test changes", changes);
-      this.filter = changes.filter.currentValue;
+      this.filterValue = changes.filter.currentValue;
       this.getJobs();
     }
   }
@@ -34,7 +36,7 @@ export class JobsComponent implements OnInit, OnChanges {
         .subscribe(data => {
           // this.jobs = Array.of(data);
           // this.jobs = data;
-          if (this.filter === "all") {
+          if (this.filterValue === "all") {
             const opportunities = data.opportunities ? data.opportunities : [];
             const interested = data.interested ? data.interested : [];
             const confirmed = data.confirmed ? data.confirmed : [];
@@ -42,16 +44,16 @@ export class JobsComponent implements OnInit, OnChanges {
             const assigned = data.assigned ? data.assigned : [];
             this.jobs = this.jobs.concat(opportunities, confirmed, confirm, assigned, interested);
 
-          } else if (this.filter === "signup") {
+          } else if (this.filterValue === "signup") {
             this.jobs = data.opportunities ? data.opportunities : [];
-          } else if (this.filter === "confirmed") {
+          } else if (this.filterValue === "confirmed") {
             this.jobs = data.confirmed ? data.confirmed : [];
-          } else if (this.filter === "confirm") {
+          } else if (this.filterValue === "confirm") {
             this.jobs = data.confirm ? data.confirm : [];
-          } else if (this.filter === "signedup") {
-            this.jobs = data.confirm ? data.confirm : [];
+          } else if (this.filterValue === "signedup") {
+            this.jobs = data.assigned ? data.assigned : [];
           }
-          console.log(this.filter);
+          console.log(this.jobs);
         }, error => console.error(error));
   }
   sameDayCheck(from_, to_) {

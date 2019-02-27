@@ -7,10 +7,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class APIService {
-  private _getNotesUrl = 'https://leke.crewcall.no/uf/me_messages';
-  private _getUserInfoUrl = 'https://leke.crewcall.no/uf/me';
-  private _getJobs = "https://leke.crewcall.no/uf/me_jobs";
-  private _getEvents = 'https://leke.crewcall.no/uf/me_calendar';
+  
 
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -29,11 +26,11 @@ export class APIService {
   }
 
   getJobs(): Observable<Jobs> {
-    return this.http.get<Jobs>(this._getJobs, { headers: this.headers });
+    return this.http.get<Jobs>(this._getJobsUrl, { headers: this.headers });
   }
 
   getEvents() {
-    return this.http.get(this._getEvents, { headers: this.headers });
+    return this.http.get(this._getEventsUrl, { headers: this.headers });
   }
 
   // public getEvents(): Observable<any> {
