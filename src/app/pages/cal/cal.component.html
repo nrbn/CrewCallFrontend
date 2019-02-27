@@ -1,0 +1,16 @@
+<div class="container p-1">
+    <!-- <div class="mb-2">
+        <h5 class="text-uppercase font-weight-bold">My Calendar</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div> -->
+    <div *ngIf="calendarOptions" class="calendar-content">
+        <ng-fullcalendar #ucCalendar [options]="calendarOptions"         
+        (dayClick)="dayClick($event.detail)"
+        (eventClick)="eventClick($event.detail)"
+        ></ng-fullcalendar>
+        <!-- (eventClick)="eventClick($event.detail)"
+        (eventDrop)="updateEvent($event.detail)"
+        (eventResize)="updateEvent($event.detail)" 
+        (clickButton)="clickButton($event.detail)" -->
+    </div>
+</div>

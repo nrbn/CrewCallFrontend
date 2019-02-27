@@ -1,0 +1,24 @@
+.card-custom {
+    padding: 0 20px;
+}
+
+.card-custom-header {
+    padding: 0.5em;
+    background-color: #E8E8E8;
+}
+
+.card-custom-content {
+    background-color: #fff;
+}
+
+.fa-chevron-circle-up:hover,
+.fa-plus-circle:hover {
+    color: rgb(134, 134, 134) !important;
+    cursor: pointer;
+}
+
+@media (min-width: 576px) { 
+    .card-custom-header h3 {
+        font-size: 2.0rem;
+    }
+ }

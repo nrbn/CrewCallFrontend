@@ -1,0 +1,24 @@
+.navbar.header{
+    background-color: #fff !important;
+    border-bottom: 1px solid #dedede;
+}
+
+.brand-title {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.brand-title small {
+    margin-top: -4px;
+}
+
+.navbar i {
+    font-size: 1.7em;
+}
+
+@media only screen and (max-width: 322px) {
+    .brand-title {
+       font-size: 0.65em;
+       font-weight: bold;
+   }
+}

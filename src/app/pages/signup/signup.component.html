@@ -1,0 +1,12 @@
+<div class="container p-4 mb-5">
+  <div class="mb-2">
+    <h5 class="text-uppercase font-weight-bold">Sign Up For Jobs</h5>
+  </div>
+  
+  
+  <button (click)="changeJobType($event)" class="btn badge mr-2" [ngClass]="signupActive ? 'badge-primary' : 'badge-light'" value="signup">Sign up</button>
+  <button (click)="changeJobType($event)" class="btn badge" [ngClass]="signedupActive ? 'badge-primary' : 'badge-light'" value="signedup">Signed Up</button>
+  
+  <div class="p-2"><app-jobs [filter] = "JobType"></app-jobs></div>
+
+</div>

@@ -1,0 +1,31 @@
+<div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
+<div class="row p-2">
+    <div class="card-custom mb-4 col-lg-6" *ngFor="let job of jobs">
+        <div class="card-custom-header row">
+            <div class="col-2"><h3 class="font-weight-bold text-center">{{job.shift.start_date | date:'dd'}}</h3></div>
+            <div class="col-8"><span class="font-weight-bold d-block">{{job.shift.start_date | date:'LLLL'}}</span>
+                <span class="font-weight-bold" *ngIf="sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | date:'EEE HH:mm' }} - {{ job.shift.end_date | date:'HH:mm' }}</span>
+                <span class="font-weight-bold" *ngIf="!sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | date:'EEE HH:mm' }} - {{ job.shift.end_date | date:'EEE HH:mm' }}</span>
+            </div>
+            <div class="col-2 p-0"><img width="40px" class="rounded mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/GoogleMaps_logo.svg/250px-GoogleMaps_logo.svg.png"/></div>
+        </div>
+        <div class="card-custom-content p-3 row">
+            <div class="col-10 col-lg-11">
+                <span class="d-block">{{job.event.name}}</span>
+                <h4 class="text-uppercase font-weight-bold">{{job.name}}</h4>
+            </div>
+            <div class="col-2 col-lg-1"><i [className]="job.show ? 'fas fa-chevron-circle-up' : 'fas fa-plus-circle'" (click)="job.show = !job.show"></i></div>
+            <div class="col-12">                    
+                <div [hidden]="job.show ? false : true" class="mb-2">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div><span class="font-weight-bold">Client: </span><span>Atomic Soul</span></div>
+                    <div><span class="font-weight-bold">Contact: </span><span>Navn Navneses, 990 99 999</span></div>
+                    <div><span class="font-weight-bold">Place: </span><span>Street 00, 0000 Oslo</span></div>
+                </div>
+            </div>
+            <div class="col-12 mt-2" *ngFor="let note of job.confirm_notes"><i class="fas fa-exclamation-triangle text-danger"></i><span class="ml-1">{{note.body}}</span></div>
+        </div>
+    </div>
+</div>
+</div>
+<ng-template #empty_jobs>No jobs found</ng-template>
