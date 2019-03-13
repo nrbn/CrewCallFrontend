@@ -1,33 +1,56 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { APIService } from '../../services/api.service';
+import { DataService } from '../../services/data.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JobsComponent implements OnInit, OnChanges {
+  currentMonth = -1;
   initialized = false;
   @Input() public filter;
   filterValue: any;
   jobs:  Object[];
+  signUpForm: FormGroup;
 
-  constructor(private apiService: APIService) {
+  signUpCSRF_TOKEN: string;
+  signUpURL: string;
+  deleteInterestCSRF_TOKEN: string;
+  deleteInterestURL: string;
+
+  confirmCSRF_TOKEN: string;
+  confirmURL: string;
+
+  @Input() public filterMonth;
+  filter_month: any;
+  constructor(private apiService: APIService, private dataService: DataService) {
   }
 
   ngOnInit() {
-    console.log("init", this.filter);
     this.filterValue = this.filter;
-    this.initialized = true;
+    this.filter_month = this.filterMonth;
     this.getJobs();
+    this.initialized = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.initialized) {
-      console.log("test changes", changes);
-      this.filterValue = changes.filter.currentValue;
-      this.getJobs();
+      if (typeof changes.filter !== "undefined") {
+        this.filterValue = this.filter;
+        this.filterValue = changes.filter.currentValue;
+        this.getJobs();
+      }
+
+      if (typeof changes.filterMonth !== "undefined") {
+        this.filter_month = this.filterMonth;
+        this.filter_month = changes.filterMonth.currentValue;
+        this.getJobsByMonth();
+      }
     }
   }
 
@@ -36,26 +59,57 @@ export class JobsComponent implements OnInit, OnChanges {
         .subscribe(data => {
           // this.jobs = Array.of(data);
           // this.jobs = data;
-          if (this.filterValue === "all") {
-            const opportunities = data.opportunities ? data.opportunities : [];
-            const interested = data.interested ? data.interested : [];
-            const confirmed = data.confirmed ? data.confirmed : [];
-            const confirm = data.confirm ? data.confirm : [];
-            const assigned = data.assigned ? data.assigned : [];
-            this.jobs = this.jobs.concat(opportunities, confirmed, confirm, assigned, interested);
-
-          } else if (this.filterValue === "signup") {
-            this.jobs = data.opportunities ? data.opportunities : [];
-          } else if (this.filterValue === "confirmed") {
-            this.jobs = data.confirmed ? data.confirmed : [];
-          } else if (this.filterValue === "confirm") {
-            this.jobs = data.confirm ? data.confirm : [];
-          } else if (this.filterValue === "signedup") {
-            this.jobs = data.assigned ? data.assigned : [];
-          }
-          console.log(this.jobs);
+          console.log("standard", data);
+          this.setUpData(data);
+          this.dataService.changeConfirm_Jobs_Count(data.assigned_count);
+          this.dataService.changeMy_Jobs_Count(data.confirmed_count);
+          this.dataService.changeSignup_Jobs_Count(data.opportunities_count);
+          this.dataService.changeSignedup_Jobs_Count(data.interested_count);
         }, error => console.error(error));
   }
+
+  getJobsByMonth() {
+    const params = {month: + (Number(this.filter_month) + 1)};
+    this.apiService.getJobsByMonth(params)
+        .subscribe(data => {
+          console.log("month", data);
+          this.setUpData(data);
+        }, error => console.error(error));
+  }
+
+  setUpData(data) {
+    const opportunities = data.opportunities ? data.opportunities : [];
+    const interested = data.interested ? data.interested : [];
+    const confirmed = data.confirmed ? data.confirmed : [];
+    const assigned = data.assigned ? data.assigned : [];
+
+    this.signUpCSRF_TOKEN = data.signup_shift._csrf_token;
+    this.signUpURL = data.signup_shift.url;
+
+    this.deleteInterestCSRF_TOKEN = data.delete_interest._csrf_token;
+    this.deleteInterestURL = data.delete_interest.url;
+
+    this.confirmCSRF_TOKEN = data.confirm_job._csrf_token;
+    this.confirmURL = data.confirm_job.url;
+
+    if (this.filterValue === "all") {
+      this.jobs = this.jobs.concat(opportunities, confirmed, confirm, assigned, interested);
+
+    } else if (this.filterValue === "signup") {
+      this.jobs = opportunities;
+
+    } else if (this.filterValue === "confirmed") {
+      this.jobs = confirmed;
+
+    } else if (this.filterValue === "assigned") {
+      this.jobs = assigned;
+
+    } else if (this.filterValue === "signedup") {
+      this.jobs = interested;
+    }
+
+  }
+
   sameDayCheck(from_, to_) {
     from_ = new Date(from_);
     to_ = new Date(to_);
@@ -63,5 +117,42 @@ export class JobsComponent implements OnInit, OnChanges {
       return true;
     }
     return false;
+  }
+
+  setMonth(month) {
+    this.currentMonth = month;
+    console.log(this.currentMonth);
+  }
+
+  signUpSubmit(form: any) {
+    if (form.valid) {
+      const params = { _csrf_token: form.value.opportunity.csfr_token };
+      let url = this.signUpURL;
+      url = url.replace("ID", form.value.opportunity.id);
+      this.apiService.postSignUpJob(url, params)
+        .subscribe(data => {
+          this.getJobs();
+        }, error => console.error(error));
+    }
+  }
+
+  deleteInterestJob(id) {
+    const params = { _csrf_token: this.deleteInterestCSRF_TOKEN };
+    let url = this.deleteInterestURL;
+    url = url.replace("ID", id);
+    this.apiService.deleteInterestJob(url, params)
+        .subscribe(data => {
+          this.getJobs();
+        }, error => console.error(error));
+  }
+
+  confirmJob(id) {
+    const params = { _csrf_token: this.confirmCSRF_TOKEN };
+    let url = this.confirmURL;
+    url = url.replace("ID", id);
+    this.apiService.deleteInterestJob(url, params)
+        .subscribe(data => {
+          this.getJobs();
+        }, error => console.error(error));
   }
 }

@@ -1,6 +1,8 @@
 <div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
 <div class="row p-2">
-    <div class="card-custom mb-4 col-lg-6" *ngFor="let job of jobs">
+    <ng-container *ngFor="let job of jobs; let j = index;">
+    <h5 *ngIf="currentMonth !== (job.shift.start_date | date:'L')" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | date:'LLLL'}} {{setMonth(job.shift.start_date | date:'L')}}</h5>
+    <div class="card-custom mb-4 col-lg-6">
         <div class="card-custom-header row">
             <div class="col-2"><h3 class="font-weight-bold text-center">{{job.shift.start_date | date:'dd'}}</h3></div>
             <div class="col-8"><span class="font-weight-bold d-block">{{job.shift.start_date | date:'LLLL'}}</span>
@@ -11,21 +13,65 @@
         </div>
         <div class="card-custom-content p-3 row">
             <div class="col-10 col-lg-11">
-                <span class="d-block">{{job.event.name}}</span>
-                <h4 class="text-uppercase font-weight-bold">{{job.name}}</h4>
+                <span class="d-block">{{job.event.location.name}}</span>
+                <h4 class="text-uppercase font-weight-bold">{{job.event.name}}</h4>
+                <h4 class="text-uppercase font-weight-bold">{{job.shift.function}}</h4>
             </div>
             <div class="col-2 col-lg-1"><i [className]="job.show ? 'fas fa-chevron-circle-up' : 'fas fa-plus-circle'" (click)="job.show = !job.show"></i></div>
             <div class="col-12">                    
-                <div [hidden]="job.show ? false : true" class="mb-2">
+                <div [className]="job.show ? 'mb-2 slider' : 'mb-2 slider closed'">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div><span class="font-weight-bold">Client: </span><span>Atomic Soul</span></div>
-                    <div><span class="font-weight-bold">Contact: </span><span>Navn Navneses, 990 99 999</span></div>
-                    <div><span class="font-weight-bold">Place: </span><span>Street 00, 0000 Oslo</span></div>
+                    <div><span class="font-weight-bold">Client: </span><span>{{job.event.location.name}}</span></div>
+                    <div *ngIf="filterValue === 'confirmed'"><span class="font-weight-bold">Contact: </span><span>Navn Navneses, 990 99 999</span></div>
+                    <div><span class="font-weight-bold">Place: </span><span>{{job.event.location.address}}</span></div>
                 </div>
             </div>
-            <div class="col-12 mt-2" *ngFor="let note of job.confirm_notes"><i class="fas fa-exclamation-triangle text-danger"></i><span class="ml-1">{{note.body}}</span></div>
+            
+            <!-- <div class="" *ngIf="filterValue === 'confirmed' || filterValue === 'signedup' || filterValue === 'confirm'"> -->
+                <div class="col-12 mt-2" *ngFor="let note of job.confirm_notes">
+                    <i class="fas fa-info-circle text-secondary"></i><span class="ml-1">{{note.body}}</span>
+                </div>
+            <!-- </div> -->
+
+            <div *ngIf="filterValue === 'signup'">
+                <form #form="ngForm" (ngSubmit)="signUpSubmit(form)">
+                <fieldset ngModelGroup="opportunity">
+                    <div class="form-check">                          
+                        <input hidden="hidden" type="text" name="id" ngModel="{{ job.id }}">
+                        <input hidden="hidden" type="text" name="csfr_token" [ngModel]="signUpCSRF_TOKEN">
+                        <input hidden="hidden" type="text" name="url" [ngModel]="signUpURL">
+                    </div>
+                </fieldset>
+                <div class="col-12 mt-2" *ngFor="let check of job.checks; let i = index;">                    
+                    <fieldset ngModelGroup="checks">
+                        <div class="form-check">                          
+                            <input type="checkbox" class="form-check-input" name="{{ i }}" [required]="check.confirm_required" ngModel>
+                            <label class="form-check-label" for="{{ i }}">
+                                <i class="fas fa-exclamation-triangle text-danger ml-1" *ngIf="check.confirm_required"></i>
+                                <span class="ml-1">{{check.body}}</span>
+                            </label>
+                        </div>
+                    </fieldset>                    
+                </div>                
+                <button [disabled]="!form.valid" type="submit" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Sign Up</button>
+                
+                <!-- <div class="col-12">
+                    <pre><code>{{form.value | json}}</code></pre>
+                </div>                 -->
+                </form>
+            </div>            
+
+            <div class="col-12" *ngIf="filterValue === 'signedup'">
+                <button (click)="deleteInterestJob(job.id)" class="btn btn-transparent text-uppercase p-0 mt-4 delete-btn"><i class="fas fa-times mr-1 text-danger"></i> i am no longer available</button> 
+            </div>
+
+            <div *ngIf="filterValue === 'assigned'">
+                <button (click)="confirmJob(job.id)" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Confirm</button>
+            </div>
+            
         </div>
     </div>
+    </ng-container>
 </div>
 </div>
 <ng-template #empty_jobs>No jobs found</ng-template>

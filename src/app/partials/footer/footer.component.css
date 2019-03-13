@@ -60,7 +60,8 @@
     } 
 
     .collapse-navbar-bottom {
-      margin-bottom: 75px;
+      margin-bottom: 65px;
+      z-index: 1000;
     }
 
     .navbar-bottom-row .badge {

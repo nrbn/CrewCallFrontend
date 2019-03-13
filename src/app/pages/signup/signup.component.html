@@ -1,12 +1,21 @@
 <div class="container p-4 mb-5">
   <div class="mb-2">
-    <h5 class="text-uppercase font-weight-bold">Sign Up For Jobs</h5>
+    <h4 class="text-uppercase font-weight-bold">Sign Up For Jobs</h4>
   </div>
   
   
-  <button (click)="changeJobType($event)" class="btn badge mr-2" [ngClass]="signupActive ? 'badge-primary' : 'badge-light'" value="signup">Sign up</button>
-  <button (click)="changeJobType($event)" class="btn badge" [ngClass]="signedupActive ? 'badge-primary' : 'badge-light'" value="signedup">Signed Up</button>
+  <div class="d-flex justify-content-center">
+      <select (change)="filterMonth($event.target.value)" class="selectpicker mt-2 mb-3">
+        <option value="-1">Choose month</option>
+        <option *ngFor="let month of months; let i = index" value={{i}}>
+            {{month}}
+        </option>
+      </select>
+  </div>
   
-  <div class="p-2"><app-jobs [filter] = "JobType"></app-jobs></div>
+  <button (click)="changeJobType($event)" class="btn badge mr-2" [ngClass]="signupActive ? 'badge-secondary' : 'badge-light'" value="signup">Sign up ({{signup_count}})</button>
+  <button (click)="changeJobType($event)" class="btn badge" [ngClass]="signedupActive ? 'badge-secondary' : 'badge-light'" value="signedup">Signed Up ({{signedup_count}})</button>
+  
+  <div class=""><app-jobs [filter] = "JobType" [filterMonth]="selectedMonth"></app-jobs></div>
 
 </div>

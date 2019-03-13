@@ -1,12 +1,20 @@
-<div class="container p-1">
-    <!-- <div class="mb-2">
-        <h5 class="text-uppercase font-weight-bold">My Calendar</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div> -->
+<div class="container p-4">
+    <div class="mb-2">
+        <h4 class="text-uppercase font-weight-bold">My Calendar</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+        
+    <div class="d-flex justify-content-center mb-4">
+        <button *ngIf="!visibleMonthLink" (click)="filterJobs($event)" class="btn badge mr-2 text-uppercase" [ngClass]="myJobsActive ? 'badge-secondary' : 'badge-light'" value="CONFIRMED"><i class="fas fa-circle text-success"></i> My jobs</button>
+        <button *ngIf="!visibleMonthLink" (click)="filterJobs($event)" class="btn badge mr-2 text-uppercase" [ngClass]="confirmActive ? 'badge-secondary' : 'badge-light'" value="ASSIGNED"><i class="fas fa-circle text-warning"></i> confirm</button>
+        <button *ngIf="!visibleMonthLink" (click)="filterJobs($event)" class="btn badge mr-2 text-uppercase" [ngClass]="signedUpActive ? 'badge-secondary' : 'badge-light'" value="INTERESTED"><i class="fas fa-circle text-danger"></i> signed up</button>
+    </div>
     <div *ngIf="calendarOptions" class="calendar-content">
+        <div *ngIf="visibleMonthLink" class="d-flex justify-content-center"><button class="btn text-uppercase" (click)="renderMonthview()"><u>Month</u></button></div>
         <ng-fullcalendar #ucCalendar [options]="calendarOptions"         
         (dayClick)="dayClick($event.detail)"
         (eventClick)="eventClick($event.detail)"
+        (eventRender)="eventRender($event.detail)"
         ></ng-fullcalendar>
         <!-- (eventClick)="eventClick($event.detail)"
         (eventDrop)="updateEvent($event.detail)"

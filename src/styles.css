@@ -12,3 +12,16 @@ i {
 .bg-dark {
   background-color: #424242 !important;    
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #343A40 !important;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 3px;
+}

@@ -10,3 +10,31 @@
     border-radius: 2px;
     max-height: 50% !important; 
 }
+
+.btn {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+ 
+ 
+ .btn:hover {
+    color: rgb(80, 80, 80);
+ }
+
+ .fa-circle {
+     font-size: 10px;
+ }
+
+ .badge {
+    border-radius: 1rem; 
+    padding: .50em .4em;
+ }
+ 
+ .badge-secondary {
+    background-color: #a8aaab;
+ }

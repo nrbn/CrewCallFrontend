@@ -11,9 +11,15 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 })
 export class CalComponent implements OnInit {
   data: any;
-  private _eventSourceURL = 'https://leke.crewcall.no/uf/me_calendar';
+  private _eventSource = "https://leke.crewcall.no/uf/me_calendar";
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+  currentDate = new Date();
+  visibleMonthLink = false;
+
+  myJobsActive = false;
+  confirmActive = false;
+  signedUpActive = false;
 
   constructor(private apiService: APIService) { }
 
@@ -21,34 +27,50 @@ export class CalComponent implements OnInit {
     // this.apiService.getEvents()
     //     .subscribe(response => {
     //       this.data = response;
+    //       this.calendarOptions = {
+    //         timeFormat: "HH:mm",
+    //         slotLabelFormat: "HH:mm",
+    //         editable: false,
+    //         eventLimit: false,
+    //         weekNumbers: false,
+    //         fixedWeekCount: false,
+    //         lazyFetching: false,
+    //         defaultView: 'month',
+    //         allDaySlot: false,
+    //         header: {
+    //           left: 'prev', // today
+    //           center: 'title',
+    //           right: 'next' // month,listMonth, agendaWeek,agendaDay,
+    //         },
+    //         // firstDay: 1,
+    //         dayNamesShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    //         events: this.data
+    //       };
     //     }, error => console.error(error));
-
     this.calendarOptions = {
+      timeFormat: "HH:mm",
+      slotLabelFormat: "HH:mm",
       editable: false,
       eventLimit: false,
       weekNumbers: false,
       fixedWeekCount: false,
       lazyFetching: false,
       defaultView: 'month',
-      navLinks: true,
-      timeFormat: 'H(:mm)',
       allDaySlot: false,
       header: {
         left: 'prev', // today
         center: 'title',
-        right: 'next, month, agendaDay' // month,listMonth, agendaWeek,agendaDay,
+        right: 'next' // month,listMonth, agendaWeek,agendaDay,
       },
       // firstDay: 1,
       dayNamesShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       // events: this.data
-      eventSources: [
-      {
-          url: this._eventSourceURL,
-          type: 'POST',
-          data: {},
-          error: function () {}
-      }
-      ],
+      eventSources: [{
+        url: this._eventSource,
+        type: 'POST',
+        data: {},
+        error: function () {}
+      }]
     };
   }
 
@@ -74,18 +96,64 @@ export class CalComponent implements OnInit {
     if (event.view.name !== 'month') {
        return;
     }
-    console.log(new Date(date), date);
-
+    // console.log(new Date(date), date);
+    this.currentDate = date;
     this.ucCalendar.fullCalendar('changeView', 'agendaDay');
     this.ucCalendar.fullCalendar('gotoDate', (date));
+    this.ucCalendar.fullCalendar("next");
+    this.ucCalendar.fullCalendar("prev");
+    this.visibleMonthLink = true;
   }
 
   eventClick(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   clickButton() {
   }
 
-}
+  renderMonthview() {
+    this.ucCalendar.fullCalendar('changeView', 'month');
+    this.ucCalendar.fullCalendar("next");
+    this.ucCalendar.fullCalendar("prev");
+    this.visibleMonthLink = false;
+  }
 
+  eventRender(event) {
+    return event;
+  }
+
+  filterJobs(event) {
+    const state = event.target.value;
+    if (state === "CONFIRMED") {
+      this.myJobsActive = !this.myJobsActive;
+      this.confirmActive = false;
+      this.signedUpActive = false;
+
+    } else if (state === "ASSIGNED") {
+      this.confirmActive = !this.confirmActive;
+      this.myJobsActive = false;
+      this.signedUpActive = false;
+
+    } else if (state === "INTERESTED") {
+      this.signedUpActive = !this.signedUpActive;
+      this.myJobsActive = false;
+      this.confirmActive = false;
+    }
+    let _url = "https://leke.crewcall.no/uf/me_calendar?state=" + state;
+    if (!this.myJobsActive && !this.confirmActive && !this.signedUpActive) {
+      _url = "https://leke.crewcall.no/uf/me_calendar";
+    }
+
+    const eventSource = {
+      url: _url,
+      type: 'POST',
+      data: {}
+    };
+
+    this.ucCalendar.fullCalendar( 'removeEventSources');
+    this.ucCalendar.fullCalendar( 'addEventSource', eventSource);
+    // this.ucCalendar.fullCalendar( 'refetchEvents' );
+    this.ucCalendar.fullCalendar('rerenderEvents');
+  }
+}

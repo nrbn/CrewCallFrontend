@@ -11,10 +11,52 @@
     background-color: #fff;
 }
 
+.h3, h3 {
+    font-size: 2rem;
+}
+
 .fa-chevron-circle-up:hover,
 .fa-plus-circle:hover {
     color: rgb(134, 134, 134) !important;
     cursor: pointer;
+}
+
+.fa-exclamation-triangle,
+.fa-info-circle {
+    font-size: 14.9px;
+}
+.custom-control-label::before, 
+.custom-control-label::after {
+top: .8rem;
+width: 1.25rem;
+height: 1.25rem;
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+  }
+
+.slider {
+	overflow-y: hidden;
+	max-height: 500px; /* approximate max height */
+
+	transition-property: all;
+	transition-duration: 14s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slider.closed {
+    transition-duration: .7s;
+	max-height: 0;
+}
+
+.fa-times {
+    font-size: 17px;
+}
+
+.delete-btn {
+    text-decoration: underline;
 }
 
 @media (min-width: 576px) { 

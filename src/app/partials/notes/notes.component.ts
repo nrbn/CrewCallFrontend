@@ -14,6 +14,10 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getNotes();
+  }
+
+  getNotes() {
     this.apiService.getNotes()
     .subscribe(
       data => {
@@ -25,6 +29,14 @@ export class NotesComponent implements OnInit {
         }
       }
     );
+  }
+
+  arhiveNote(url) {
+    this.apiService.archiveNote(url)
+    .subscribe(data => {
+      // console.log("data", data);
+      this.getNotes();
+    }, error => console.error(error));
   }
 }
 

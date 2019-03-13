@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as $ from 'jquery';
 import { FullCalendarModule } from 'ng-fullcalendar';
 
+import { HttpErrorInterceptor } from './http-error.interceptor';
 import { AppComponent } from './app.component';
 import { NotesComponent } from './partials/notes/notes.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,9 +39,17 @@ import { SignupComponent } from './pages/signup/signup.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FullCalendarModule
+    FullCalendarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [APIService, DataService],
+  providers: [APIService, DataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
