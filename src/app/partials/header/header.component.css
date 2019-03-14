@@ -16,6 +16,10 @@
     font-size: 1.7em;
 }
 
+.fa-calendar-alt:hover {
+    color: #28A745 !important;
+}
+
 @media only screen and (max-width: 322px) {
     .brand-title {
        font-size: 0.65em;

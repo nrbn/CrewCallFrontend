@@ -11,7 +11,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
   styleUrls: ['./jobs.component.css'],
 })
 export class JobsComponent implements OnInit, OnChanges {
-  currentMonth = -1;
+  currentMonth;
   initialized = false;
   @Input() public filter;
   filterValue: any;
@@ -32,6 +32,8 @@ export class JobsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.currentMonth = -1;
+    console.log(this.currentMonth);
     this.filterValue = this.filter;
     this.filter_month = this.filterMonth;
     this.getJobs();
@@ -39,6 +41,8 @@ export class JobsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.currentMonth = -1;
+    console.log("c", this.currentMonth);
     if (this.initialized) {
       if (typeof changes.filter !== "undefined") {
         this.filterValue = this.filter;
@@ -96,6 +100,7 @@ export class JobsComponent implements OnInit, OnChanges {
       this.jobs = this.jobs.concat(opportunities, confirmed, confirm, assigned, interested);
 
     } else if (this.filterValue === "signup") {
+      this.currentMonth = -1;
       this.jobs = opportunities;
 
     } else if (this.filterValue === "confirmed") {
@@ -121,7 +126,6 @@ export class JobsComponent implements OnInit, OnChanges {
 
   setMonth(month) {
     this.currentMonth = month;
-    console.log(this.currentMonth);
   }
 
   signUpSubmit(form: any) {

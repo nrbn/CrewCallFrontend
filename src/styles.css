@@ -25,3 +25,77 @@ i {
   font-size: 14px;
   margin-top: 3px;
 }
+
+/* MY CALENDAR STYLE */
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
+  border-color: #fff !important;
+}
+.fc-month-view .fc-time {
+  display: none;
+}
+
+.fc-month-view .fc-day-grid-event {
+  height: 3px;
+  width: 1px;
+  border-radius: 50% !important;
+  margin: 1px auto !important;
+}
+
+.fc-month-view .fc-day-top {
+  text-align: center !important;
+}
+
+.fc-month-view .fc-day-number {
+  float: none !important;
+}
+
+.fc-state-default {
+  background-color: #ffff !important;
+  background-image: linear-gradient(to bottom, #fff, #fff) !important;
+  border-color: #fff #fff #fff !important;
+  border-color: 0 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(255, 255, 255, 0.05) !important;
+  color: #5d5d5d !important;
+}
+
+.fc-unthemed td.fc-today {
+  background: #ffff !important;
+  font-weight: bold;
+}
+
+.fc-month-view .fc-day-header {
+  color: #cbcbcb;  
+  padding-bottom: 1em !important;
+}
+
+.fc-toolbar .fc-center {
+  margin-top: 2px;
+}
+
+.fc-center h2 {
+  font-size: 1.4rem;
+}
+
+.fc-time-grid-container tr,
+.fc-time-grid-container td {
+  border: 1px solid #eaeaea  !important;
+}
+
+.fc-basic-view .fc-body .fc-row {
+	min-height: 3.7em !important; /* ensure that all rows are at least this tall */
+}
+
+.fc-scroller {
+	min-height: 320px;
+}
+
+@media (min-width: 576px) { 
+  .fc-month-view .fc-day-grid-event {
+    height: 5px;
+    width: 3px;
+  }
+}
+
+/* CALENDAR STYLE FINISHED */
