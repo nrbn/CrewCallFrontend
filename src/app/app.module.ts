@@ -15,12 +15,12 @@ import { FooterComponent } from './partials/footer/footer.component';
 import { MyjobsComponent } from './pages/myjobs/myjobs.component';
 import { JobsComponent } from './partials/jobs/jobs.component';
 import { CalComponent } from './pages/cal/cal.component';
+import { NotespageComponent } from './pages/notespage/notespage.component';
 
 import { APIService } from './services/api.service';
 import { DataService } from './services/data.service';
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
-import { NotespageComponent } from './notespage/notespage.component';
 
 
 @NgModule({
@@ -35,7 +35,7 @@ import { NotespageComponent } from './notespage/notespage.component';
     CalComponent,
     ConfirmComponent,
     SignupComponent,
-    NotespageComponent,
+    NotespageComponent
   ],
   imports: [
     BrowserModule,

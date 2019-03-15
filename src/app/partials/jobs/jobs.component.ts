@@ -2,8 +2,6 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-jobs',
@@ -16,7 +14,6 @@ export class JobsComponent implements OnInit, OnChanges {
   @Input() public filter;
   filterValue: any;
   jobs:  Object[];
-  signUpForm: FormGroup;
 
   signUpCSRF_TOKEN: string;
   signUpURL: string;

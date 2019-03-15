@@ -33,8 +33,14 @@ const routes: Routes = [
     component: CalComponent
   },
   {
-    path: 'notes',
-    component: NotespageComponent
+    path: 'personal',
+    component: NotespageComponent,
+    data : {type : 'personal'}
+  },
+  {
+    path: 'general',
+    component: NotespageComponent,
+    data : {type : 'general'}
   }
 ];
 

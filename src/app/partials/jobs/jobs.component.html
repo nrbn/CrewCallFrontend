@@ -11,7 +11,7 @@
                 <span class="font-weight-bold" *ngIf="!sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | date:'EEE HH:mm' }} - {{ job.shift.end_date | date:'EEE HH:mm' }}</span>
             </div>
             <div class="col-2 p-0">
-                <a [href]='"http://maps.google.com/?q="+job.event.location.address.address_line_1+","+job.event.location.address.postal_code+","+job.event.location.address.postal_name'>
+                <a target="_blank" [href]='"http://maps.google.com/?q="+job.event.location.address.address_line_1+","+job.event.location.address.postal_code+","+job.event.location.address.postal_name'>
                 <img width="40px" class="rounded mx-auto" [src]="googleMapsIconURL"/>
                 </a>
             </div>
@@ -33,7 +33,7 @@
                                 <span class="mr-2">{{contact.name}}, {{contact.mobile_phone_number}}</span>
                         </ng-container>
                     </ng-container>
-                    <div><span class="font-weight-bold">Place: </span><span>{{job.event.location.address.address_line_1 + ", " + job.event.location.address.postal_code + job.event.location.address.postal_name}}</span></div>
+                    <div><span class="font-weight-bold">Place: </span><span>{{job.event.location.address.address_line_1 + ", " + job.event.location.address.postal_code + " " + job.event.location.address.postal_name}}</span></div>
                 </div>
             </div>
             
