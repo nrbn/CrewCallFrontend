@@ -9,7 +9,8 @@ import { APIService } from '../../services/api.service';
 export class NotesComponent implements OnInit {
   notes$: any;
   @Input() public filter;
-
+  @Input() public limited;
+  limit: Number;
   constructor(private apiService: APIService) {
   }
 
@@ -26,6 +27,12 @@ export class NotesComponent implements OnInit {
           this.notes$ = this.notes$.personal;
         } else if (this.filter === "general") {
           this.notes$ = this.notes$.general;
+        }
+
+        if (this.limited) {
+          this.limit = 5;
+        } else {
+          this.limit = this.notes$.length;
         }
       }
     );

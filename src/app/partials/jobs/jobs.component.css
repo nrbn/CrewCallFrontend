@@ -59,6 +59,15 @@ height: 1.25rem;
     text-decoration: underline;
 }
 
+.fa-comment {
+    font-size: 29px;
+    color: #273238;
+}
+
+.fa-comment:hover {
+    color: #868686;
+}
+
 @media (min-width: 576px) { 
     .card-custom-header h3 {
         font-size: 2.0rem;

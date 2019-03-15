@@ -6,6 +6,7 @@ import { CalComponent } from './pages/cal/cal.component';
 
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { NotespageComponent } from './pages/notespage/notespage.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalComponent
+  },
+  {
+    path: 'notes',
+    component: NotespageComponent
   }
 ];
 

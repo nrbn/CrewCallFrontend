@@ -28,12 +28,16 @@ export class JobsComponent implements OnInit, OnChanges {
 
   @Input() public filterMonth;
   filter_month: any;
+  googleMapsIconURL = "images/250px-GoogleMaps_logo.svg.png";
+
+
+  @Input() limited;
+  limit: Number;
   constructor(private apiService: APIService, private dataService: DataService) {
   }
 
   ngOnInit() {
     this.currentMonth = -1;
-    console.log(this.currentMonth);
     this.filterValue = this.filter;
     this.filter_month = this.filterMonth;
     this.getJobs();
@@ -42,7 +46,6 @@ export class JobsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.currentMonth = -1;
-    console.log("c", this.currentMonth);
     if (this.initialized) {
       if (typeof changes.filter !== "undefined") {
         this.filterValue = this.filter;
@@ -63,7 +66,6 @@ export class JobsComponent implements OnInit, OnChanges {
         .subscribe(data => {
           // this.jobs = Array.of(data);
           // this.jobs = data;
-          console.log("standard", data);
           this.setUpData(data);
           this.dataService.changeConfirm_Jobs_Count(data.assigned_count);
           this.dataService.changeMy_Jobs_Count(data.confirmed_count);
@@ -76,7 +78,6 @@ export class JobsComponent implements OnInit, OnChanges {
     const params = {month: + (Number(this.filter_month) + 1)};
     this.apiService.getJobsByMonth(params)
         .subscribe(data => {
-          console.log("month", data);
           this.setUpData(data);
         }, error => console.error(error));
   }
@@ -113,6 +114,12 @@ export class JobsComponent implements OnInit, OnChanges {
       this.jobs = interested;
     }
 
+    if (this.limited) {
+      this.limit = 5;
+    } else {
+      this.limit = this.jobs.length;
+    }
+
   }
 
   sameDayCheck(from_, to_) {
@@ -130,7 +137,7 @@ export class JobsComponent implements OnInit, OnChanges {
 
   signUpSubmit(form: any) {
     if (form.valid) {
-      const params = { _csrf_token: form.value.opportunity.csfr_token };
+      const params = { _csrf_token: form.value.opportunity.csfr_token, comment: form.value.commentContent };
       let url = this.signUpURL;
       url = url.replace("ID", form.value.opportunity.id);
       this.apiService.postSignUpJob(url, params)

@@ -20,6 +20,7 @@ import { APIService } from './services/api.service';
 import { DataService } from './services/data.service';
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { NotespageComponent } from './notespage/notespage.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     CalComponent,
     ConfirmComponent,
     SignupComponent,
+    NotespageComponent,
   ],
   imports: [
     BrowserModule,

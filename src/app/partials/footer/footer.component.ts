@@ -15,12 +15,14 @@ export class FooterComponent implements OnInit {
   signup_count: Number;
 
   constructor(private apiService: APIService, private dataService: DataService) {
-    // this.apiService.getJobs()
-    //     .subscribe(data => {
-    //       this.jobs = Array.of(data);
-    //       this.confirm_count = (typeof this.jobs[0].confirm_job.length === 'undefined') ? 0 : this.jobs[0].confirm_job.length;
-    //       this.interested_count = (typeof this.jobs[0].interested.length === 'undefined') ? 0 : this.jobs[0].interested.length;
-    //     }, error => console.error(error));
+    this.apiService.getJobs()
+        .subscribe(data => {
+          // this.jobs = Array.of(data);
+          this.dataService.changeConfirm_Jobs_Count(data.assigned_count);
+          this.dataService.changeMy_Jobs_Count(data.confirmed_count);
+          this.dataService.changeSignup_Jobs_Count(data.opportunities_count);
+          this.dataService.changeSignedup_Jobs_Count(data.interested_count);
+        }, error => console.error(error));
 
     this.dataService.current_confirm_jobs_count.subscribe(count => this.confirm_count = count);
     this.dataService.current_myjob_count.subscribe(count => this.myjob_count = count);
