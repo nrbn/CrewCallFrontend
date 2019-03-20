@@ -3,7 +3,7 @@
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
     <h5 *ngIf="currentMonth !== (job.shift.start_date | date:'L') || j === 0" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | date:'LLLL'}} {{setMonth(job.shift.start_date | date:'L')}}</h5>
-    <div class="card-custom mb-4 col-lg-6">
+    <div class="card-custom mb-4 col-lg-6" id="item-{{j}}">
         <div class="card-custom-header row">
             <div class="col-2"><h3 class="font-weight-bold text-center">{{job.shift.start_date | date:'dd'}}</h3></div>
             <div class="col-8"><span class="font-weight-bold d-block">{{job.shift.start_date | date:'LLLL'}}</span>
@@ -12,7 +12,7 @@
             </div>
             <div class="col-2 p-0">
                 <a target="_blank" [href]='"http://maps.google.com/?q="+job.event.location.address.address_line_1+","+job.event.location.address.postal_code+","+job.event.location.address.postal_name'>
-                <img width="40px" class="rounded mx-auto" [src]="googleMapsIconURL"/>
+                <img width="40px" class="rounded mx-auto" src="assets/img/google_maps.png"/>
                 </a>
             </div>
         </div>
@@ -44,30 +44,30 @@
             <!-- </div> -->
 
             <div *ngIf="filterValue === 'signup'">
-                <form #form="ngForm" (ngSubmit)="signUpSubmit(form)">
-                <fieldset ngModelGroup="opportunity">
-                    <div class="form-check">                          
-                        <input hidden="hidden" type="text" name="id" ngModel="{{ job.id }}">
-                        <input hidden="hidden" type="text" name="csfr_token" [ngModel]="signUpCSRF_TOKEN">
-                        <input hidden="hidden" type="text" name="url" [ngModel]="signUpURL">
-                    </div>
-                </fieldset>
-                <div class="col-12 mt-2" *ngFor="let check of job.checks; let i = index;">                    
-                    <fieldset ngModelGroup="checks">
-                        <div class="form-check">                          
-                            <input type="checkbox" class="form-check-input" name="{{ i }}" [required]="check.confirm_required" ngModel>
-                            <label class="form-check-label" for="{{ i }}">
+                <form #form="ngForm" (ngSubmit)="signUpSubmit(form, j)">
+                <div class="form-check">                          
+                    <input hidden="hidden" type="text" name="id" ngModel="{{ job.id }}">
+                    <input hidden="hidden" type="text" name="_csrf_token" [ngModel]="signUpCSRF_TOKEN">
+                </div>
+                <fieldset ngModelGroup="checks">
+                    <div class="col-12 mt-2" *ngFor="let check of job.checks; let i = index;">
+                        <fieldset ngModelGroup="{{ i }}">
+                        <div class="form-check">
+                            <input hidden="hidden" type="text" name="id" ngModel="{{ check.id }}" ngModel>                          
+                            <input type="checkbox" class="form-check-input" name="checked" [required]="check.confirm_required" ngModel>
+                            <label class="form-check-label" for="checked">
                                 <i class="fas fa-exclamation-triangle text-danger ml-1" *ngIf="check.confirm_required"></i>
-                                <span class="ml-1">{{check.body}}</span>
+                                <p class="ml-1 d-inline">{{check.body}}</p>
                             </label>
                         </div>
-                    </fieldset>                    
-                </div>                
+                        </fieldset>
+                    </div>
+                </fieldset>                
                 <button [disabled]="!form.valid" type="submit" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Sign Up</button>
-                <button data-toggle="modal" data-target="#commentModalCenter" class="btn btn-link mt-4"><i class="fas fa-comment"></i></button>
+                <a data-toggle="modal" attr.data-target="{{'#commentModalCenter'+job.id}}" class="btn btn-link mt-4"><i class="fas fa-comment"></i></a>
                 
                 <!-- Modal -->
-                <div class="modal fade" id="commentModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="{{'commentModalCenter'+job.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -90,11 +90,11 @@
             </div>            
 
             <div class="col-12" *ngIf="filterValue === 'signedup'">
-                <button (click)="deleteInterestJob(job.id)" class="btn btn-transparent text-uppercase p-0 mt-4 delete-btn"><i class="fas fa-times mr-1 text-danger"></i> i am no longer available</button> 
+                <button (click)="deleteInterestJob(job.id, j)" class="btn btn-transparent text-uppercase p-0 mt-4 delete-btn"><i class="fas fa-times mr-1 text-danger"></i> i am no longer available</button> 
             </div>
 
             <div *ngIf="filterValue === 'assigned'">
-                <button (click)="confirmJob(job.id)" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Confirm</button>
+                <button (click)="confirmJob(job.id, j)" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Confirm</button>
             </div>
             
         </div>

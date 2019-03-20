@@ -7,6 +7,9 @@ import { CalComponent } from './pages/cal/cal.component';
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { NotespageComponent } from './pages/notespage/notespage.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AbsenceComponent } from './pages/absence/absence.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -41,6 +44,14 @@ const routes: Routes = [
     path: 'general',
     component: NotespageComponent,
     data : {type : 'general'}
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'absence',
+    component: AbsenceComponent
   }
 ];
 

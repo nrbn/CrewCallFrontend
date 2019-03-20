@@ -25,8 +25,6 @@ export class JobsComponent implements OnInit, OnChanges {
 
   @Input() public filterMonth;
   filter_month: any;
-  googleMapsIconURL = "images/250px-GoogleMaps_logo.svg.png";
-
 
   @Input() limited;
   limit: Number;
@@ -132,11 +130,13 @@ export class JobsComponent implements OnInit, OnChanges {
     this.currentMonth = month;
   }
 
-  signUpSubmit(form: any) {
+  signUpSubmit(form: any, index) {
     if (form.valid) {
-      const params = { _csrf_token: form.value.opportunity.csfr_token, comment: form.value.commentContent };
+      const element = document.getElementById("item-" + index);
+      $(element).addClass("animated zoomOut");
+      const params = form.value;
       let url = this.signUpURL;
-      url = url.replace("ID", form.value.opportunity.id);
+      url = url.replace("ID", form.value.id);
       this.apiService.postSignUpJob(url, params)
         .subscribe(data => {
           this.getJobs();
@@ -144,7 +144,9 @@ export class JobsComponent implements OnInit, OnChanges {
     }
   }
 
-  deleteInterestJob(id) {
+  deleteInterestJob(id, index) {
+    const element = document.getElementById("item-" + index);
+    $(element).addClass("animated zoomOut");
     const params = { _csrf_token: this.deleteInterestCSRF_TOKEN };
     let url = this.deleteInterestURL;
     url = url.replace("ID", id);
@@ -154,10 +156,13 @@ export class JobsComponent implements OnInit, OnChanges {
         }, error => console.error(error));
   }
 
-  confirmJob(id) {
+  confirmJob(id, index) {
+    const element = document.getElementById("item-" + index);
+    $(element).addClass("animated zoomOut");
     const params = { _csrf_token: this.confirmCSRF_TOKEN };
     let url = this.confirmURL;
     url = url.replace("ID", id);
+
     this.apiService.deleteInterestJob(url, params)
         .subscribe(data => {
           this.getJobs();

@@ -20,6 +20,18 @@
     color: #28A745 !important;
 }
 
+.text-dark {
+    color: #343A40;
+    outline: none !important;
+}
+
+.text-dark:focus, .text-dark:active {
+    outline: none !important;
+}
+
+.active-light {
+    background-color: rgb(235, 235, 235);
+}
 @media only screen and (max-width: 322px) {
     .brand-title {
        font-size: 0.65em;

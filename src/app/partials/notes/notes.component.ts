@@ -38,12 +38,13 @@ export class NotesComponent implements OnInit {
     );
   }
 
-  arhiveNote(url) {
+  arhiveNote(url, index) {
+    const element = document.getElementById("item-" + index);
+    $(element).addClass("animated zoomOut");
     this.apiService.archiveNote(url)
-    .subscribe(data => {
-      // console.log("data", data);
-      this.getNotes();
-    }, error => console.error(error));
+      .subscribe(data => {
+        this.getNotes();
+      }, error => console.error(error));
   }
 }
 

@@ -5,12 +5,17 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.crewcall-theme {
+  background-color: #343A40;
+  color: #ffff;
+}
+
 i {
     font-size: 1.4em;
 }
 
 .bg-dark {
-  background-color: #424242 !important;    
+  background-color: #343A40 !important;    
 }
 
 .dropdown-item.active,

@@ -21,6 +21,8 @@ import { APIService } from './services/api.service';
 import { DataService } from './services/data.service';
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AbsenceComponent } from './pages/absence/absence.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { SignupComponent } from './pages/signup/signup.component';
     CalComponent,
     ConfirmComponent,
     SignupComponent,
-    NotespageComponent
+    NotespageComponent,
+    ProfileComponent,
+    AbsenceComponent
   ],
   imports: [
     BrowserModule,

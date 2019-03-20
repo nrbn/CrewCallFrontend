@@ -4,7 +4,6 @@
 
   .navbar-bottom-item {
       width: 20%;
-      background-color: #292929;
       padding: 10px 5px 10px 10px ;
       min-height: 50px;                  
       border-right: 1px solid #343a40;
@@ -23,6 +22,10 @@
       color: #fff;
   }
   
+  .active {
+    background-color: #000 !important;
+  }
+
   .navbar-bottom-item {
       text-decoration: none !important;
       color: #ffff;

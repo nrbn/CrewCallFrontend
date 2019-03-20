@@ -1,7 +1,7 @@
 <header>            
     <nav class="navbar navbar-expand navbar-light bg-light">
       <a class="navbar-brand" href="#">
-            <img src="/images/logo.gif" width="40" height="40" class="d-inline-block float-left" alt="">
+            <img src="assets/img/logo.gif" width="40" height="40" class="d-inline-block float-left" alt="">
             <div class="brand-title float-right ml-2">CrewCall<small class="d-block">{{ navbarModel.fullname }}</small></div>
         </a>
 
@@ -43,7 +43,7 @@
                   <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">My Profile</a>
+                  <a class="dropdown-item" routerLink="/profile" routerLinkActive="active-light">My Profile</a>
                   <a class="dropdown-item" href="#">Links</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="https://leke.crewcall.no/logout">Sign Out</a>
