@@ -9,6 +9,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { NotespageComponent } from './pages/notespage/notespage.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AbsenceComponent } from './pages/absence/absence.component';
+import { JobslogComponent } from './pages/jobslog/jobslog.component';
 
 const routes: Routes = [
   {
@@ -50,8 +51,12 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'absence',
+    path: 'profile/absence',
     component: AbsenceComponent
+  },
+  {
+    path: 'profile/jobslog',
+    component: JobslogComponent,
   }
 ];
 

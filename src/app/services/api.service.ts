@@ -13,7 +13,7 @@ export class APIService {
   private _getJobsUrl = "https://leke.crewcall.no/uf/me_jobs";
   private _getEventsUrl = 'https://leke.crewcall.no/uf/me_calendar';
   private _getUserProfile = 'https://leke.crewcall.no/uf/me_profile';
-
+  private _getJobsLog = 'https://leke.crewcall.no/uf/me_joblog';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
@@ -377,5 +377,9 @@ export class APIService {
 
   public getProfile() {
     return this.http.get(this._getUserProfile, { headers: this.headers });
+  }
+
+  public getJobsLog() {
+    return this.http.get(this._getJobsLog, { headers: this.headers });
   }
 }

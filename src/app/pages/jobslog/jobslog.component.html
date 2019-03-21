@@ -1,0 +1,32 @@
+<div class="container p-4 mb-5">
+    <div class="mb-4">
+      <h4 class="text-uppercase font-weight-bold d-inline">My Hours</h4>
+      <p>Please make sure your information is up to date at all times</p>
+    </div>
+    
+    <div class="row mb-4" *ngIf="!jobslog || jobslog.length > 0">
+      <div class="col-12">
+        <table class="table table-sm table-striped">
+          <thead class="crewcall-theme">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Job</th>
+              <th scope="col">In</th>
+              <th scope="col">Out</th>            
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let log of jobslog[0].jobslog; let i=index;">
+              <tr>
+                  <th scope="row">{{ i }}</th>
+                  <td>{{log.job}}</td>
+                  <td>{{log.in | date: mediumDate}}</td>
+                  <td>{{log.out | date: mediumDate}}</td>                
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

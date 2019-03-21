@@ -2,3 +2,9 @@
     color: #fff !important;
     background-color: #343A40 !important;
 }
+.image-circle {
+    min-height: 110px;
+    max-height: 110px;
+    max-width: 110px;
+    border-radius: 50%;
+}

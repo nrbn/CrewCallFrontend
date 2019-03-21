@@ -4,21 +4,29 @@
       <p>Please make sure your contact information is up to date at all times</p>
     </div>
     
-    <div class="row mb-4">
-      <div class="col-4 col-lg-2 text-center">
-          <i class="far fa-user-circle fa-4x text-align-center col-12"></i>
-          <a href="#" class="col-12">change</a>
-      </div>
-      <div class="col-8 col-lg-10">
-        <span class="font-weight-bold text-capitalize d-block">{{profileModel[0].firstname + " " +  profileModel[0].lastname}}</span>
-        <ng-container *ngFor="let role of profileModel[0].roles; let isLast=last"><span>{{role.function}}{{isLast ? '' : ', '}}</span></ng-container>
-        
+    <div class="mb-4">
+      <div class="row">
+        <div class="col-5 col-lg-2">
+            <img src="{{profileModel[0].profile_picture_url}}" class="image-circle" />
+            <!-- <i class="far fa-user-circle fa-4x text-align-center col-12"></i>
+            <a href="#" class="col-12">change</a> -->
+        </div>
+        <div class="col-7 col-lg-10">        
+          <span class="font-weight-bold text-capitalize d-block">{{profileModel[0].firstname + " " +  profileModel[0].lastname}}</span>
+          <ng-container *ngFor="let role of profileModel[0].roles; let isLast=last"><span>{{role.function}}{{isLast ? '' : ', '}}</span></ng-container>    
+        </div>
       </div>
 
-      <div class="col-12 col-lg-6 mt-4">
-        <span class="font-weight-bold d-block">{{profileModel[0].address.address_line_1}}</span>
-        <span class="font-weight-bold d-block">{{profileModel[0].address.postal_code + " " + profileModel[0].address.postal_name}}</span>
+      <div class="row">
+      <div class="col-12 mt-4">
+          <ng-container *ngFor="let line of profileModel[0].address; let isLast=last">
+              <span class="font-weight-bold"  *ngFor="let element of line | keyvalue">
+                  {{element.value}}
+                  <span *ngIf="!isLast" class="d-block"></span>
+              </span>
+          </ng-container>
       </div>
+
       <div class="col-12 col-lg-6 mt-4">
         <div>Mobile: <span class="font-weight-bold">{{profileModel[0].mobile_phone_number}}</span> </div>
         <div>E-mail: <span class="font-weight-bold">{{profileModel[0].email}}</span> </div>
@@ -32,10 +40,12 @@
       </div>
 
       <div class="col-12 mt-4">
-        <a href="#" class="btn btn-light p-4 border border-secondary text-uppercase col-12 col-lg-3 mb-2 mr-2">My hours</a>
-        <a routerLink="/absence" class="btn btn-light p-4 border border-secondary text-uppercase col-12 col-lg-3 mb-2 mr-2">My absence</a>
+        <a routerLink="/profile/jobslog" class="btn btn-light p-4 border border-secondary text-uppercase col-12 col-lg-3 mb-2 mr-2">My hours</a>
+        <a routerLink="/profile/absence" class="btn btn-light p-4 border border-secondary text-uppercase col-12 col-lg-3 mb-2 mr-2">My absence</a>
         <a href="#" class="btn btn-light p-4 border border-secondary text-uppercase col-12 col-lg-3 mb-2">Files</a>
       </div>
+    </div>
+    
     </div>
 
     
