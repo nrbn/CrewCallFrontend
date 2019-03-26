@@ -1,0 +1,29 @@
+<div class="container p-4 mb-5">
+  <div class="mb-4">
+    <h4 class="text-uppercase font-weight-bold d-inline">My Files</h4>
+    <p>Please make sure your information is up to date at all times</p>
+  </div>
+  
+  <div class="row mb-4" *ngIf="!files || files.length > 0">
+    <div class="col-12">
+      <table class="table table-sm table-striped">
+        <thead class="crewcall-theme">
+          <tr>
+            <th scope="col">File</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>          
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let file of files[0].files; let i=index;">
+            <tr>
+                <td><a href="{{file.url}}" target="_blank">{{file.name}}</a></td>                   
+                <td>{{file.description}}</td>          
+                <td>{{file.file_type}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

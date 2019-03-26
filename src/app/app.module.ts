@@ -24,6 +24,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AbsenceComponent } from './pages/absence/absence.component';
 import { JobslogComponent } from './pages/jobslog/jobslog.component';
+import { FilesComponent } from './pages/files/files.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { JobslogComponent } from './pages/jobslog/jobslog.component';
     NotespageComponent,
     ProfileComponent,
     AbsenceComponent,
-    JobslogComponent
+    JobslogComponent,
+    FilesComponent
   ],
   imports: [
     BrowserModule,

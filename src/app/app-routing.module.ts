@@ -10,10 +10,15 @@ import { NotespageComponent } from './pages/notespage/notespage.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AbsenceComponent } from './pages/absence/absence.component';
 import { JobslogComponent } from './pages/jobslog/jobslog.component';
+import { FilesComponent } from './pages/files/files.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: HomeComponent
+  },
+  {
+    path: '**',
     component: HomeComponent
   },
   {
@@ -57,6 +62,10 @@ const routes: Routes = [
   {
     path: 'profile/jobslog',
     component: JobslogComponent,
+  },
+  {
+    path: 'profile/files',
+    component: FilesComponent
   }
 ];
 
