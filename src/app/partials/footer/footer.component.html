@@ -1,7 +1,7 @@
 <footer>
     <!-- Fixed navbar -->
     <div class="bg-dark text-light fixed-bottom p-2">
-        <div class="row navbar-bottom-row">          
+        <div class="row navbar-bottom-row" id="navbar-bottom-row">          
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="col navbar-bottom-item"><i class="fas fa-home"></i></a>                  
             <a routerLink="/myjobs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="col navbar-bottom-item">My Jobs<span class="badge badge-success">{{myjob_count}}</span></a>
             <a routerLink="/confirm" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="col navbar-bottom-item">Confirm<span class="badge badge-warning">{{confirm_count}}</span></a>

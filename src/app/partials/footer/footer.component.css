@@ -16,11 +16,13 @@
         text-align: center !important;
         vertical-align: middle !important;
     }
-  
-  .navbar-bottom-item:hover {
-    background-color: #000;
-      color: #fff;
-  }
+
+    @media (pointer: fine) {
+      .navbar-bottom-item:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }  
   
   .active {
     background-color: #000 !important;
@@ -41,12 +43,6 @@
   .navbar-bottom-dropdown-item {
       color: #ffff;
       border-radius: 0 !important;
-  }
-  
-  .navbar-bottom-dropdown-item:active,
-  .navbar-bottom-dropdown-item:hover {
-    color: #000;
-    background-color: #ffff;
   }
   
   .navbar-bottom-row .badge {

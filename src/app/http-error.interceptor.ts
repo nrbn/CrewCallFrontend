@@ -25,7 +25,7 @@ import {
             }
             // window.alert(errorMessage);
             if (error.status === 200) {
-                window.location.href = 'https://leke.crewcall.no/login';
+              window.location.href = '../../login';
             }
             return throwError(errorMessage);
           })
