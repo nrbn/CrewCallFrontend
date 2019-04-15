@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as $ from 'jquery';
 import { FullCalendarModule } from 'ng-fullcalendar';
+import { MomentModule } from 'angular2-moment';
+import * as moment from 'moment';
 
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { AppComponent } from './app.component';
@@ -51,7 +53,8 @@ import { FilesComponent } from './pages/files/files.component';
     HttpClientModule,
     FullCalendarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
   ],
   providers: [APIService, DataService,
     {

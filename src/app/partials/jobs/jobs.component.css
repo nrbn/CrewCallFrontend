@@ -1,9 +1,11 @@
 .card-custom {
-    padding: 0 20px;
+    padding: 2px 18px;
+    border: 2px solid #e4e4e4;
+    background-color: #fff;
 }
 
 .card-custom-header {
-    padding: 0.5em;
+    padding: .2em .5em;
     background-color: #E8E8E8;
 }
 
@@ -11,8 +13,19 @@
     background-color: #fff;
 }
 
-.h3, h3 {
-    font-size: 2rem;
+h2 {
+    font-size: 2.5rem;
+    letter-spacing: -0.9px;
+}
+
+.date-header {
+    color: #7B8387;
+    font-size: 14.9px;
+    margin-top: .25rem;
+}
+
+.date-header span:nth-child(1) {
+    margin-bottom: -5px;
 }
 
 .fa-chevron-circle-up:hover,

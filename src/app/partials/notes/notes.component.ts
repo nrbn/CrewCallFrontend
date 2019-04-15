@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { APIService } from '../../services/api.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-notes',
@@ -11,7 +12,7 @@ export class NotesComponent implements OnInit {
   @Input() public filter;
   @Input() public limited;
   limit: Number;
-  constructor(private apiService: APIService) {
+  constructor(private apiService: APIService, private dataService: DataService) {
   }
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class NotesComponent implements OnInit {
     .subscribe(
       data => {
         this.notes$ = (data);
+        this.dataService.changeNotesArray(data);
         if (this.filter === "personal") {
           this.notes$ = this.notes$.personal;
         } else if (this.filter === "general") {
@@ -36,6 +38,10 @@ export class NotesComponent implements OnInit {
         }
       }
     );
+
+    this.dataService.currentNotesArray.subscribe(array => {
+          console.log(array);
+        });
   }
 
   arhiveNote(url, index) {

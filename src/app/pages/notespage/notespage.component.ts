@@ -14,7 +14,6 @@ export class NotespageComponent implements OnInit {
       .data
       .subscribe(v => {
         this.type = v.type;
-        console.log(this.type);
       });
   }
 

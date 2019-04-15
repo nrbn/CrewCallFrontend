@@ -2,13 +2,17 @@
 <div class="row p-2">
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
-    <h5 *ngIf="currentMonth !== (job.shift.start_date | date:'L') || j === 0" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | date:'LLLL'}} {{setMonth(job.shift.start_date | date:'L')}}</h5>
+    <h5 *ngIf="currentMonth !== (job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M') || j === 0" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'MMMM'}} {{setMonth(job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M')}}</h5>
     <div class="card-custom mb-4 col-lg-6" id="item-{{j}}">
         <div class="card-custom-header row">
-            <div class="col-2"><h3 class="font-weight-bold text-center">{{job.shift.start_date | date:'dd'}}</h3></div>
-            <div class="col-8"><span class="font-weight-bold d-block">{{job.shift.start_date | date:'LLLL'}}</span>
-                <span class="font-weight-bold" *ngIf="sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | date:'EEE HH:mm' }} - {{ job.shift.end_date | date:'HH:mm' }}</span>
-                <span class="font-weight-bold" *ngIf="!sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | date:'EEE HH:mm' }} - {{ job.shift.end_date | date:'EEE HH:mm' }}</span>
+            <div class="col-10">
+                <div class="row">
+                    <h2 class="font-weight-bold mr-2">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'DD'}}</h2>
+                    <div class="date-header"><span class="font-weight-bold d-block">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'MMMM'}}</span>
+                        <span class="font-weight-bold" *ngIf="sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }} - {{ job.shift.end_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'kk:mm' }}</span>
+                        <span class="font-weight-bold" *ngIf="!sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }} - {{ job.shift.end_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }}</span>
+                    </div>
+                </div>               
             </div>
             <div class="col-2 p-0">
                 <a target="_blank" [href]='"http://maps.google.com/?q="+job.event.location.address_flat.addressLine1+","+job.event.location.address_flat.postalCode+","+job.event.location.address_flat.postalName'>
@@ -62,11 +66,15 @@
                         </div>
                         </fieldset>
                     </div>
+                </fieldset>
+                <fieldset class="form-group mt-4" [hidden]="!job.comment">
+                    <textarea class="ml-3" id="commentFormControlTextarea1" name="comment" ngModel></textarea>
                 </fieldset>                
                 <button [disabled]="!form.valid" type="submit" class="btn btn-dark mt-4 ml-3"><i class="fas fa-check text-success"></i> Sign Up</button>
-                <a data-toggle="modal" attr.data-target="{{'#commentModalCenter'+job.id}}" class="btn btn-link mt-4"><i class="fas fa-comment"></i></a>
+                <a  class="btn btn-link mt-4"><i class="fas fa-comment" (click)="job.comment = !job.comment"></i></a>                
+                <!-- <a data-toggle="modal" attr.data-target="{{'#commentModalCenter'+job.id}}" class="btn btn-link mt-4"><i class="fas fa-comment"></i></a>
                 
-                <!-- Modal -->
+                --> <!-- Modal 
                 <div class="modal fade" id="{{'commentModalCenter'+job.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -81,7 +89,7 @@
                         </div>
                     </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- <div class="col-12">
                     <pre><code>{{form.value | json}}</code></pre>
