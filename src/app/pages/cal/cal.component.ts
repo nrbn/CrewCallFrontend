@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { APIService } from '../../services/api.service';
-import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import * as moment from 'moment';
 
 @Component({
@@ -76,8 +75,7 @@ export class CalComponent implements OnInit {
   }
 
   dayClick(event) {
-    console.log(this._eventSource);
-    console.log(event.date._d);
+    console.log(event);
     const date = moment(event.date._d);
     console.log(date);
     // if (!$(event.jsEvent.target).hasClass("fc-content-skeleton")) {
@@ -97,14 +95,15 @@ export class CalComponent implements OnInit {
     // console.log(event.jsEvent.target); // div.fc-content-skeleton fc-day-number fc-day.fc-widget-content
 
     if (event.view.name !== 'month') {
+      console.log("not month");
        return;
     }
     // console.log(new Date(date), date);
     this.currentDate = date;
     this.ucCalendar.fullCalendar('changeView', 'agendaDay');
+    this.ucCalendar.fullCalendar('gotoDate', (date));
     this.ucCalendar.fullCalendar("next");
     this.ucCalendar.fullCalendar("prev");
-    this.ucCalendar.fullCalendar('gotoDate', (date));
     this.visibleMonthLink = true;
   }
 
