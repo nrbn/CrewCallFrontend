@@ -3,6 +3,7 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { APIService } from '../../services/api.service';
 import { isGeneratedFile } from '@angular/compiler/src/aot/util';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cal',
@@ -14,7 +15,7 @@ export class CalComponent implements OnInit {
   private _eventSource = "https://leke.crewcall.no/uf/me_calendar";
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  currentDate = new Date();
+  currentDate: any;
   visibleMonthLink = false;
 
   myJobsActive = false;
@@ -75,8 +76,10 @@ export class CalComponent implements OnInit {
   }
 
   dayClick(event) {
-    console.log(event);
-    const date = event.date._d;
+    console.log(this._eventSource);
+    console.log(event.date._d);
+    const date = moment(event.date._d);
+    console.log(date);
     // if (!$(event.jsEvent.target).hasClass("fc-content-skeleton")) {
     //   date = ($(event.jsEvent.target).attr("data-date"));
     //   if ($(event.jsEvent.target).hasClass("fc-day-number")) {
@@ -99,9 +102,9 @@ export class CalComponent implements OnInit {
     // console.log(new Date(date), date);
     this.currentDate = date;
     this.ucCalendar.fullCalendar('changeView', 'agendaDay');
-    this.ucCalendar.fullCalendar('gotoDate', (date));
     this.ucCalendar.fullCalendar("next");
     this.ucCalendar.fullCalendar("prev");
+    this.ucCalendar.fullCalendar('gotoDate', (date));
     this.visibleMonthLink = true;
   }
 
