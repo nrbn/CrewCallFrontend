@@ -7,14 +7,14 @@
         <div class="card-custom-header row">
             <div class="col-10">
                 <div class="row">
-                    <h2 class="font-weight-bold mr-2">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'DD'}}</h2>
-                    <div class="date-header"><span class="font-weight-bold d-block">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'MMMM'}}</span>
+                    <h2 class="font-weight-bold mr-2 mt-1 ml-2">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'DD'}}</h2>
+                    <div class="date-header"><span class="font-weight-bold d-block mt-1">{{job.shift.start_date | amParse:'YYYY-MM-DD' | amDateFormat:'MMMM'}}</span>
                         <span class="font-weight-bold" *ngIf="sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }} - {{ job.shift.end_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'kk:mm' }}</span>
                         <span class="font-weight-bold" *ngIf="!sameDayCheck(job.shift.start_date, job.shift.end_date)">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }} - {{ job.shift.end_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'ddd kk:mm' }}</span>
                     </div>
                 </div>               
             </div>
-            <div class="col-2 p-0">
+            <div class="col-2 p-0 mt-1">
                 <a target="_blank" [href]='"http://maps.google.com/?q="+job.event.location.address_flat.addressLine1+","+job.event.location.address_flat.postalCode+","+job.event.location.address_flat.postalName'>
                 <img width="40px" class="rounded mx-auto" src="assets/img/google_maps.png"/>
                 </a>
