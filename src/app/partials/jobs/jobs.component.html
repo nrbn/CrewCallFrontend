@@ -1,9 +1,8 @@
 <div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
-<div class="row">
+<div class="row p-2">
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
-    <h5 *ngIf="currentMonth !== (job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M') || j === 0" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'MMMM'}} {{setMonth(job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M')}}</h5>
-    <div class="p-2">
+    <h5 *ngIf="currentMonth !== (job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M') || j === 0" class="col-12 p-0 mt-2 font-weight-bold">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'MMMM'}} {{setMonth(job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M')}}</h5>
         <div class="card-custom mb-4 col-lg-6" id="item-{{j}}">
         <div class="card-custom-header row">
             <div class="col-10">
@@ -107,7 +106,6 @@
             </div>
             
         </div>
-    </div>
     </div>
     </ng-container>
     </ng-container>
