@@ -1,5 +1,5 @@
 <div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
-<div class="row p-2">
+<div class="row p-3">
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
     <h5 *ngIf="currentMonth !== (job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M') || j === 0" class="col-12 p-0 mt-2 font-weight-bold">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'MMMM'}} {{setMonth(job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M')}}</h5>
@@ -37,7 +37,7 @@
                                 <span class="mr-2">{{contact.name}}, {{contact.mobile_phone_number}}</span>
                         </ng-container>
                     </ng-container>
-                    <div><span class="font-weight-bold">Place: </span><span>{{job.event.location.address_flat.addressLine1 + ", " + job.event.location.address_flat.postalCode + " " + job.event.location.address_flat.postalName}}</span></div>
+                    <div *ngIf="job.event.location.address_flat.addressLine1"><span class="font-weight-bold">Place: </span><span>{{job.event.location.address_flat.addressLine1 + ", " + job.event.location.address_flat.postalCode + " " + job.event.location.address_flat.postalName}}</span></div>
                 </div>
             </div>
             
