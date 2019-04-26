@@ -8,7 +8,7 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class APIService {
-  private _getNotesUrl = '../../uf/me_messages';
+  private _getNotesUrl = '../../uf/me_notes';
   private _getUserInfoUrl = '../../uf/me';
   private _getJobsUrl = "../../uf/me_jobs";
   private _getUserProfile = '../../uf/me_profile';

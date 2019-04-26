@@ -1,9 +1,10 @@
 <div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
-<div class="row p-2">
+<div class="row">
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
     <h5 *ngIf="currentMonth !== (job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M') || j === 0" class="col-12 mt-2 font-weight-bold">{{job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'MMMM'}} {{setMonth(job.shift.start_date | amParse:'YYYY-MM-DD kk:mm' | amDateFormat:'M')}}</h5>
-    <div class="card-custom mb-4 col-lg-6" id="item-{{j}}">
+    <div class="p-2">
+        <div class="card-custom mb-4 col-lg-6" id="item-{{j}}">
         <div class="card-custom-header row">
             <div class="col-10">
                 <div class="row">
@@ -29,7 +30,7 @@
             <div class="col-2 col-lg-1"><i [className]="job.show ? 'fas fa-chevron-circle-up' : 'fas fa-plus-circle'" (click)="job.show = !job.show"></i></div>
             <div class="col-12">                    
                 <div [className]="job.show ? 'mb-2 slider' : 'mb-2 slider closed'">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
                     <div><span class="font-weight-bold">Client: </span><span>{{job.event.location.name}}</span></div>
                     <ng-container *ngIf="filterValue === 'confirmed' && job.event.contacts.length > 0">
                         <span class="font-weight-bold">Contact: </span>
@@ -107,10 +108,11 @@
             
         </div>
     </div>
+    </div>
     </ng-container>
     </ng-container>
 </div>
 </div>
 <ng-template #empty_jobs>
-    <div class="alert alert-warning mt-5">No jobs found</div>
+    <div class="alert alert-warning mt-5">No jobs here!</div>
 </ng-template>
