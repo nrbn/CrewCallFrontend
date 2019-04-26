@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class CalComponent implements OnInit {
   data: any;
-  private _eventSource = "https://leke.crewcall.no/uf/me_calendar";
+  private _eventSource = "../../uf/me_calendar";
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   currentDate: any;
