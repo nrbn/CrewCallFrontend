@@ -29,7 +29,7 @@
             <div class="col-2 col-lg-1"><i [className]="job.show ? 'fas fa-chevron-circle-up' : 'fas fa-plus-circle'" (click)="job.show = !job.show"></i></div>
             <div class="col-12">                    
                 <div [className]="job.show ? 'mb-2 slider' : 'mb-2 slider closed'">
-                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
+                    <p *ngIf="job.event.description">{{job.event.description}}</p>
                     <div><span class="font-weight-bold">Client: </span><span>{{job.event.location.name}}</span></div>
                     <ng-container *ngIf="filterValue === 'confirmed' && job.event.contacts.length > 0">
                         <span class="font-weight-bold">Contact: </span>
