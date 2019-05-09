@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import gbLocale from 'fullcalendar/dist/locale/en-gb';
 import { APIService } from '../../services/api.service';
 import * as moment from 'moment';
 
@@ -48,6 +49,7 @@ export class CalComponent implements OnInit {
     //       };
     //     }, error => console.error(error));
     this.calendarOptions = {
+      locale : 'en-gb',
       timeFormat: "HH:mm",
       slotLabelFormat: "HH:mm",
       editable: false,
@@ -62,8 +64,8 @@ export class CalComponent implements OnInit {
         center: 'title',
         right: 'next' // month,listMonth, agendaWeek,agendaDay,
       },
-      // firstDay: 1,
-      dayNamesShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      // firstDay: 0,
+      dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
       // events: this.data
       eventSources: [{
         url: this._eventSource,
@@ -75,9 +77,7 @@ export class CalComponent implements OnInit {
   }
 
   dayClick(event) {
-    console.log(event);
     const date = moment(event.date._d);
-    console.log(date);
     // if (!$(event.jsEvent.target).hasClass("fc-content-skeleton")) {
     //   date = ($(event.jsEvent.target).attr("data-date"));
     //   if ($(event.jsEvent.target).hasClass("fc-day-number")) {
