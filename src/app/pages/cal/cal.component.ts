@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
-import gbLocale from 'fullcalendar/dist/locale/en-gb';
+import { Locale } from 'fullcalendar/dist/locale-all';
 import { APIService } from '../../services/api.service';
 import * as moment from 'moment';
 
@@ -49,7 +49,7 @@ export class CalComponent implements OnInit {
     //       };
     //     }, error => console.error(error));
     this.calendarOptions = {
-      locale : 'en-gb',
+      locale : 'locale',
       timeFormat: "HH:mm",
       slotLabelFormat: "HH:mm",
       editable: false,
@@ -64,7 +64,7 @@ export class CalComponent implements OnInit {
         center: 'title',
         right: 'next' // month,listMonth, agendaWeek,agendaDay,
       },
-      // firstDay: 0,
+      firstDay: 1,
       dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
       // events: this.data
       eventSources: [{
