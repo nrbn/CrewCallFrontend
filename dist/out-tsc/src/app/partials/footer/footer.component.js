@@ -4,15 +4,17 @@ import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
 var FooterComponent = /** @class */ (function () {
     function FooterComponent(apiService, dataService) {
-        // this.apiService.getJobs()
-        //     .subscribe(data => {
-        //       this.jobs = Array.of(data);
-        //       this.confirm_count = (typeof this.jobs[0].confirm_job.length === 'undefined') ? 0 : this.jobs[0].confirm_job.length;
-        //       this.interested_count = (typeof this.jobs[0].interested.length === 'undefined') ? 0 : this.jobs[0].interested.length;
-        //     }, error => console.error(error));
         var _this = this;
         this.apiService = apiService;
         this.dataService = dataService;
+        this.apiService.getJobs()
+            .subscribe(function (data) {
+            // this.jobs = Array.of(data);
+            _this.dataService.changeConfirm_Jobs_Count(data.assigned_count);
+            _this.dataService.changeMy_Jobs_Count(data.confirmed_count);
+            _this.dataService.changeSignup_Jobs_Count(data.opportunities_count);
+            _this.dataService.changeSignedup_Jobs_Count(data.interested_count);
+        }, function (error) { return console.error(error); });
         this.dataService.current_confirm_jobs_count.subscribe(function (count) { return _this.confirm_count = count; });
         this.dataService.current_myjob_count.subscribe(function (count) { return _this.myjob_count = count; });
         this.dataService.current_signup_jobs_count.subscribe(function (count) { return _this.signup_count = count; });

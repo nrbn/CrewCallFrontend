@@ -9,6 +9,8 @@ var DataService = /** @class */ (function () {
         this.current_confirm_jobs_count = this.confirm_jobs_count.asObservable();
         this.signup_jobs_count = new BehaviorSubject(0);
         this.current_signup_jobs_count = this.signup_jobs_count.asObservable();
+        this.signedup_jobs_count = new BehaviorSubject(0);
+        this.current_signedup_jobs_count = this.signedup_jobs_count.asObservable();
         this.notesArray = new BehaviorSubject([]);
         this.currentNotesArray = this.notesArray.asObservable();
     }
@@ -21,8 +23,15 @@ var DataService = /** @class */ (function () {
     DataService.prototype.changeSignup_Jobs_Count = function (count) {
         this.signup_jobs_count.next(count);
     };
+    DataService.prototype.changeSignedup_Jobs_Count = function (count) {
+        this.signedup_jobs_count.next(count);
+    };
     DataService.prototype.changeNotesArray = function (array) {
         this.notesArray.next(array);
+    };
+    DataService.prototype.getMonthsList = function () {
+        return ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"];
     };
     DataService = tslib_1.__decorate([
         Injectable({

@@ -27,7 +27,7 @@ import {
             if (error.status === 200) {
               window.location.href = '../../login';
             }
-            return throwError(errorMessage);
+            return throwError(error);
           })
         );
     }

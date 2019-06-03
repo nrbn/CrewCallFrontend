@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'crewcall';
-        this.myJobsData = 40;
     }
     AppComponent = tslib_1.__decorate([
         Component({
