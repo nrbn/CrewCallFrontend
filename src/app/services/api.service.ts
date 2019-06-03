@@ -14,6 +14,7 @@ export class APIService {
   private _getUserProfile = '../../uf/me_profile';
   private _getJobsLog = '../../uf/me_joblog';
   private _getFiles = '../../uf/me_files';
+  private _changePassword = '../../uf/me_password';
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
@@ -61,5 +62,13 @@ export class APIService {
 
   public getFiles() {
     return this.http.get(this._getFiles, { headers: this.headers });
+  }
+
+  public getCangePassword() {
+    return this.http.get(this._changePassword, { headers: this.headers });
+  }
+
+  public postCangePassword(params) {
+    return this.http.post(this._changePassword, params);
   }
 }

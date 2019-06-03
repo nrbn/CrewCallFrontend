@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AbsenceComponent } from './pages/absence/absence.component';
 import { JobslogComponent } from './pages/jobslog/jobslog.component';
 import { FilesComponent } from './pages/files/files.component';
+import { PasswordComponent } from './pages/password/password.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,10 @@ const routes: Routes = [
   {
     path: 'profile/files',
     component: FilesComponent
+  },
+  {
+    path: 'profile/password',
+    component: PasswordComponent
   }
 ];
 
