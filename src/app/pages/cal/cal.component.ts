@@ -142,9 +142,9 @@ export class CalComponent implements OnInit {
       this.myJobsActive = false;
       this.confirmActive = false;
     }
-    let _url = "https://leke.crewcall.no/uf/me_calendar?state=" + state;
+    let _url = "../../uf/me_calendar?state=" + state;
     if (!this.myJobsActive && !this.confirmActive && !this.signedUpActive) {
-      _url = "https://leke.crewcall.no/uf/me_calendar";
+      _url = "../../uf/me_calendar";
     }
 
     const eventSource = {
