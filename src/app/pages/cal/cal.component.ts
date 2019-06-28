@@ -102,8 +102,8 @@ export class CalComponent implements OnInit {
     this.currentDate = date;
     this.ucCalendar.fullCalendar('changeView', 'agendaDay');
     this.ucCalendar.fullCalendar('gotoDate', (date));
-    this.ucCalendar.fullCalendar("next");
-    this.ucCalendar.fullCalendar("prev");
+    // this.ucCalendar.fullCalendar("next");
+    // this.ucCalendar.fullCalendar("prev");
     this.visibleMonthLink = true;
   }
 
