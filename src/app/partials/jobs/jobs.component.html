@@ -30,14 +30,14 @@
             <div class="col-12">                    
                 <div [className]="job.show ? 'mb-2 slider' : 'mb-2 slider closed'">
                     <p *ngIf="job.event.description">{{job.event.description}}</p>
-                    <div><span class="font-weight-bold">Client: </span><span>{{job.event.location.name}}</span></div>
+                    <div><span class="font-weight-bold">Client: </span><span>{{job.event.organization.name}}</span></div>
                     <ng-container *ngIf="filterValue === 'confirmed' && job.event.contacts.length > 0">
                         <span class="font-weight-bold">Contact: </span>
                         <ng-container *ngFor="let contact of job.event.contacts">
                                 <span class="mr-2">{{contact.name}}, {{contact.mobile_phone_number}}</span>
                         </ng-container>
                     </ng-container>
-                    <div *ngIf="job.event.location.address_flat.addressLine1"><span class="font-weight-bold">Place: </span><span>{{job.event.location.address_flat.addressLine1 + ", " + job.event.location.address_flat.postalCode + " " + job.event.location.address_flat.postalName}}</span></div>
+                    <div *ngIf="job.event.location.address_flat.addressLine1"><span class="font-weight-bold">Place: </span><span>{{ job.event.location.name }}, {{job.event.location.address_flat.addressLine1 + ", " + job.event.location.address_flat.postalCode + " " + job.event.location.address_flat.postalName}}</span></div>
                 
                 </div>
             </div>
