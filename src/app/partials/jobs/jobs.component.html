@@ -1,4 +1,6 @@
 <div *ngIf="!jobs || jobs.length > 0; else empty_jobs">
+<div *ngIf="jobs">
+<h4 class="text-uppercase font-weight-bold mt-4" *ngIf="limited">My Jobs</h4>
 <div class="row p-3">
     <ng-container *ngFor="let job of jobs; let j = index;">
     <ng-container *ngIf="j < limit">
@@ -110,6 +112,7 @@
     </div>
     </ng-container>
     </ng-container>
+</div>
 </div>
 </div>
 <ng-template #empty_jobs>

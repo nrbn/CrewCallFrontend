@@ -40,8 +40,8 @@ export class NotesComponent implements OnInit {
     );
 
     this.dataService.currentNotesArray.subscribe(array => {
-          console.log(array);
-        });
+          // console.log(array);
+    });
   }
 
   arhiveNote(url, index) {

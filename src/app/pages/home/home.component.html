@@ -1,19 +1,9 @@
 <div class="container p-4 mb-5">
-  <div class="mb-2">
-        <h4 class="text-uppercase font-weight-bold">Notes for you2</h4>        
-  </div>    
-  <div class=""><app-notes [filter] = "personal" limited="true"></app-notes></div>
-  <a routerLink="/personal" class="float-right">See archive</a>
 
-  <div class="mb-2 mt-5">
-      <h4 class="text-uppercase font-weight-bold">General Info</h4>
-  </div>
-  <div class=""><app-notes [filter] = "general" limited="true"></app-notes></div>
-  <a routerLink="/general" class="float-right">See archive</a>
+  <app-notes [filter] = "personal" limited="true"></app-notes>
 
-  <div class="mb-2 mt-5">
-      <h4 class="text-uppercase font-weight-bold">My Jobs</h4>
-  </div>
-  <div class=""><app-jobs [filter] = "JobType" limited="true"></app-jobs></div>
+  <app-notes [filter] = "general" limited="true"></app-notes>
+
+  <app-jobs [filter] = "JobType" limited="true"></app-jobs>
 
 </div>

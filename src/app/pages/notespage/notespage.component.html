@@ -1,12 +1,3 @@
-<div class="container p-4 mb-5">    
-    <div class="mb-2">
-        <ng-container *ngIf="type === 'personal'">
-          <h4 class="text-uppercase font-weight-bold d-inline">Personal notes </h4>
-        </ng-container>
-        <ng-container *ngIf="type === 'general'">
-          <h4 class="text-uppercase font-weight-bold d-inline">General notes </h4>
-        </ng-container>
-    </div>
-
+<div class="container p-4 mb-5">
     <div class=""><app-notes [filter] = "type"></app-notes></div>
 </div>
