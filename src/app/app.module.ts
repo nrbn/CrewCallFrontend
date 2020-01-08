@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as $ from 'jquery';
 import { FullCalendarModule } from 'ng-fullcalendar';
+import { MomentModule } from 'angular2-moment';
+import * as moment from 'moment';
 
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { AppComponent } from './app.component';
@@ -25,6 +27,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AbsenceComponent } from './pages/absence/absence.component';
 import { JobslogComponent } from './pages/jobslog/jobslog.component';
 import { FilesComponent } from './pages/files/files.component';
+import { PasswordComponent } from './pages/password/password.component';
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import { FilesComponent } from './pages/files/files.component';
     ProfileComponent,
     AbsenceComponent,
     JobslogComponent,
-    FilesComponent
+    FilesComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { FilesComponent } from './pages/files/files.component';
     HttpClientModule,
     FullCalendarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
   ],
   providers: [APIService, DataService,
     {

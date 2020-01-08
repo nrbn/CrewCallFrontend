@@ -6,6 +6,12 @@ import { MyjobsComponent } from './pages/myjobs/myjobs.component';
 import { CalComponent } from './pages/cal/cal.component';
 import { ConfirmComponent } from './pages/confirm/confirm.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { NotespageComponent } from './pages/notespage/notespage.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AbsenceComponent } from './pages/absence/absence.component';
+import { JobslogComponent } from './pages/jobslog/jobslog.component';
+import { FilesComponent } from './pages/files/files.component';
+import { PasswordComponent } from './pages/password/password.component';
 var routes = [
     {
         path: '',
@@ -30,6 +36,36 @@ var routes = [
     {
         path: 'calendar',
         component: CalComponent
+    },
+    {
+        path: 'personal',
+        component: NotespageComponent,
+        data: { type: 'personal' }
+    },
+    {
+        path: 'general',
+        component: NotespageComponent,
+        data: { type: 'general' }
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent
+    },
+    {
+        path: 'profile/absence',
+        component: AbsenceComponent
+    },
+    {
+        path: 'profile/jobslog',
+        component: JobslogComponent,
+    },
+    {
+        path: 'profile/files',
+        component: FilesComponent
+    },
+    {
+        path: 'profile/password',
+        component: PasswordComponent
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -37,7 +73,7 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = tslib_1.__decorate([
         NgModule({
-            imports: [RouterModule.forRoot(routes)],
+            imports: [RouterModule.forRoot(routes, { useHash: true })],
             exports: [RouterModule]
         })
     ], AppRoutingModule);

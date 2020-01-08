@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { APIService } from '../../services/api.service';
 import { DataService } from '../../services/data.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-jobs',
@@ -118,12 +119,10 @@ export class JobsComponent implements OnInit, OnChanges {
   }
 
   sameDayCheck(from_, to_) {
-    from_ = new Date(from_);
-    to_ = new Date(to_);
-    if (from_.getDate() === to_.getDate()) {
-      return true;
-    }
-    return false;
+    from_ = moment(from_, "YYYY-MM-DD").format();
+    to_ = moment(to_, "YYYY-MM-DD").format();
+
+    return moment(from_).isSame(to_);
   }
 
   setMonth(month) {

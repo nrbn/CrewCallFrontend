@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import { Locale } from 'fullcalendar/dist/locale-all';
 import { APIService } from '../../services/api.service';
-import { isGeneratedFile } from '@angular/compiler/src/aot/util';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cal',
@@ -11,10 +12,10 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 })
 export class CalComponent implements OnInit {
   data: any;
-  private _eventSource = "https://leke.crewcall.no/uf/me_calendar";
+  private _eventSource = "../../uf/me_calendar";
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  currentDate = new Date();
+  currentDate: any;
   visibleMonthLink = false;
 
   myJobsActive = false;
@@ -48,6 +49,7 @@ export class CalComponent implements OnInit {
     //       };
     //     }, error => console.error(error));
     this.calendarOptions = {
+      locale : 'locale',
       timeFormat: "HH:mm",
       slotLabelFormat: "HH:mm",
       editable: false,
@@ -62,8 +64,8 @@ export class CalComponent implements OnInit {
         center: 'title',
         right: 'next' // month,listMonth, agendaWeek,agendaDay,
       },
-      // firstDay: 1,
-      dayNamesShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      firstDay: 1,
+      dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
       // events: this.data
       eventSources: [{
         url: this._eventSource,
@@ -75,8 +77,7 @@ export class CalComponent implements OnInit {
   }
 
   dayClick(event) {
-    console.log(event);
-    const date = event.date._d;
+    const date = moment(event.date._d);
     // if (!$(event.jsEvent.target).hasClass("fc-content-skeleton")) {
     //   date = ($(event.jsEvent.target).attr("data-date"));
     //   if ($(event.jsEvent.target).hasClass("fc-day-number")) {
@@ -94,14 +95,15 @@ export class CalComponent implements OnInit {
     // console.log(event.jsEvent.target); // div.fc-content-skeleton fc-day-number fc-day.fc-widget-content
 
     if (event.view.name !== 'month') {
+      console.log("not month");
        return;
     }
     // console.log(new Date(date), date);
     this.currentDate = date;
     this.ucCalendar.fullCalendar('changeView', 'agendaDay');
     this.ucCalendar.fullCalendar('gotoDate', (date));
-    this.ucCalendar.fullCalendar("next");
-    this.ucCalendar.fullCalendar("prev");
+    // this.ucCalendar.fullCalendar("next");
+    // this.ucCalendar.fullCalendar("prev");
     this.visibleMonthLink = true;
   }
 
@@ -140,9 +142,9 @@ export class CalComponent implements OnInit {
       this.myJobsActive = false;
       this.confirmActive = false;
     }
-    let _url = "https://leke.crewcall.no/uf/me_calendar?state=" + state;
+    let _url = "../../uf/me_calendar?state=" + state;
     if (!this.myJobsActive && !this.confirmActive && !this.signedUpActive) {
-      _url = "https://leke.crewcall.no/uf/me_calendar";
+      _url = "../../uf/me_calendar";
     }
 
     const eventSource = {
