@@ -40,7 +40,6 @@ export class APIService {
     return this.http.get<Jobs>(this._getJobsUrl, { headers: this.headers });
   }
 
-
   getJobsByMonth(params): Observable<Jobs> {
     return this.http.get<Jobs>(this._getJobsUrl, { headers: this.headers, params });
   }
