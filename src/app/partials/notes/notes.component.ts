@@ -16,11 +16,12 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.limited = JSON.parse(this.limited);
     this.getNotes();
   }
 
   getNotes() {
-    this.apiService.getNotes()
+    this.apiService.getNotes(this.limited)
     .subscribe(
       data => {
         this.notes$ = (data);
@@ -40,7 +41,7 @@ export class NotesComponent implements OnInit {
     );
 
     this.dataService.currentNotesArray.subscribe(array => {
-          // console.log(array);
+      // console.log(array);
     });
   }
 

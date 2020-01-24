@@ -36,6 +36,10 @@ export class JobsComponent implements OnInit, OnChanges {
     this.currentMonth = -1;
     this.filterValue = this.filter;
     this.filter_month = this.filterMonth;
+    if (typeof this.limited !== "undefined") {
+      this.limited = JSON.parse(this.limited);
+    }
+
     this.getJobs();
     this.initialized = true;
   }

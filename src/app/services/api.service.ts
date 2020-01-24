@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { INote, Jobs } from './interface';
 import { Observable, of, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -19,8 +19,9 @@ export class APIService {
 
   constructor(private http: HttpClient) { }
 
-  getNotes() {
-    return this.http.get(this._getNotesUrl, { headers: this.headers });
+  getNotes(limited) {
+    const params = {"archive" : (limited ? 0 : 1).toString()};
+    return this.http.get(this._getNotesUrl, { headers: this.headers, params: params });
   }
 
   archiveNote(archiveNoteUrl: any) {
