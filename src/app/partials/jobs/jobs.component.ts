@@ -96,7 +96,7 @@ export class JobsComponent implements OnInit, OnChanges {
 
     this.confirmCSRF_TOKEN = data.confirm_job._csrf_token;
     this.confirmURL = data.confirm_job.url;
-
+    console.log(this.filterValue);
     if (this.filterValue === "all") {
       this.jobs = this.jobs.concat(opportunities, confirmed, confirm, assigned, interested);
 
